@@ -6,6 +6,10 @@ public class Bookmark {
     private int userNo;
     private int missionNo;
 
+    private String challengeName;
+
+    private String videoTitle;
+
     public Bookmark() {
     }
 
@@ -31,5 +35,21 @@ public class Bookmark {
 
     public void setMissionNo(int missionNo) {
         this.missionNo = missionNo;
+    }
+
+    public String getChallengeName() {
+        return challengeName;
+    }
+
+    public void setChallengeName(String challengeName) {
+        this.challengeName = challengeName;
+    }
+
+    public String getVideoTitle() {
+        return videoTitle;
+    }
+
+    public void setVideoTitle(String videoTitle) {
+        this.videoTitle = videoTitle;
     }
 }

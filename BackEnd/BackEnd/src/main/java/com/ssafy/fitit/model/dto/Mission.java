@@ -1,5 +1,7 @@
 package com.ssafy.fitit.model.dto;
 
+import java.util.List;
+
 public class Mission {
 
     private int missionNo;

@@ -24,6 +24,14 @@
 
     </insert>
 
+    <select id="selectOne" resultMap="userMap" parameterType="String">
+        SELECT * FROM user WHERE id = #{id}
+    </select>
+
+    <select id="selectByUserNo" resultMap="userMap" parameterType="int">
+        SELECT * FROM user WHERE user_no = #{userNo}
+    </select>
+
 
 
 

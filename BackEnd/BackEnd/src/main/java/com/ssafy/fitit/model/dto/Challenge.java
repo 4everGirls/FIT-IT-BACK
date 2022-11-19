@@ -1,6 +1,7 @@
 package com.ssafy.fitit.model.dto;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class Challenge {
 
@@ -8,9 +9,19 @@ public class Challenge {
     private int userNo;
     private String challengeName;
     private String challengeContent;
-    private Timestamp startDate;
-    private Timestamp endDate;
+    private String startDate;
+    private String endDate;
     private int point;
+
+    private List<Mission> missions;
+
+    public List<Mission> getMissions() {
+        return missions;
+    }
+
+    public void setMissions(List<Mission> missions) {
+        this.missions = missions;
+    }
 
     public Challenge() {
     }
@@ -47,19 +58,19 @@ public class Challenge {
         this.challengeContent = challengeContent;
     }
 
-    public Timestamp getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Timestamp startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public Timestamp getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Timestamp endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 

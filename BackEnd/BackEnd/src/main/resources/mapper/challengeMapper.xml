@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.fitit.model.dao.ChallengeDao">
+    <resultMap id="ChallengeInfo" type="Challenge">
+        <result column="challenge_no" property="challengeNo"/>
+        <result column="user_no" property="userNo"/>
+        <result column="challenge_name" property="challengeName"/>
+        <result column="challenge_content" property="challengeContent"/>
+        <result column="start_date" property="startDate"/>
+        <result column="end_date" property="endDate"/>
+        <result column="point" property="point"/>
+<!--        <collection property="missions"/>-->
+    </resultMap>
+
+    <insert id="insertChallenge" parameterType="Challenge">
+        insert into challenge (user_no, challenge_name, challenge_content, start_date, end_date, point)
+        values (#{userNo}, #{challengeName}, #{challengeContent}, #{startDate}, #{endDate}, #{point})
+    </insert>
+
+    <select id="recetChallengeNo" resultType="int">
+        select max(challenge_no) as challenge_no
+        from challenge
+    </select>
+
+    <insert id="insertMission" parameterType="Mission">
+        insert into mission (challenge_no, video_id, video_title, channel_name, video_thumbnail)
+        values (#{challengeNo}, #{videoId}, #{videoTitle}, #{channelName}, #{videoThumbnail})
+    </insert>
+
+    <update id="updateChallenge" parameterType="Challenge">
+        update challenge
+        set challenge_name    = #{challengeName},
+            challenge_content = #{challengeContent},
+            start_date        = #{startDate},
+            end_date          = #{endDate},
+            point             = #{point}
+        where challenge_no = #{challengeNo}
+    </update>
+
+    <update id="updateMission" parameterType="Mission">
+        update mission
+        set video_id        = #{videoId},
+            video_title     = #{videoTitle},
+            channel_name    = #{channelName},
+            video_thumbnail = #{videoThumbnail}
+        where mission_no = #{missionNo}
+    </update>
+
+    <delete id="deleteMission" parameterType="int">
+        delete
+        from mission
+        where challenge_no = #{challengeNo}
+    </delete>
+
+    <delete id="deleteChallenge" parameterType="int">
+        delete
+        from challenge
+        where challenge_no = #{challengeNo}
+    </delete>
+
+
+    <select id="selectAllMakeChallenge" parameterType="int" resultMap="ChallengeInfo">
+        select *
+        from challenge
+        where user_no = #{userNo}
+    </select>
+
+
+</mapper>
