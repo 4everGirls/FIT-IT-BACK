@@ -28,6 +28,15 @@ public interface ChallengeDao {
     //내가 만든 챌린지 정보들
     List<Challenge> selectAllMakeChallenge(int userNo);
 
+    //챌린지 가입하기
+    int insertParticipant(int challenge_no, int user_no);
+
+    //내가 가입한 챌린지 정보들
+
+    //전체 챌린지 정보(나중에 챌린지 분류)
+
+
+    //특정 챌린지 상세 정보
 
     //북마크 등록하기
     int insertBookMark(Bookmark bookmark);
@@ -37,12 +46,6 @@ public interface ChallengeDao {
 
 
 
-    //내가 가입한 챌린지 정보들
-
-    //전체 챌린지 정보(나중에 챌린지 분류)
-
-
-    //특정 챌린지 상세 정보
 
 
 }

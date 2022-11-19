@@ -24,4 +24,7 @@ public interface ChallengeService {
     //내가 만든 챌린지 정보들
     List<Challenge> getMakeChallengList(int userNo);
 
+    //챌린지 가입하기
+    int insertParticipant(int challenge_no, int user_no);
+
 }

@@ -67,5 +67,10 @@
         where user_no = #{userNo}
     </select>
 
+    <insert id="insertParticipant" parameterType="int">
+        insert into participant (challenge_no, user_no)
+        values (#{challengeNo},#{userNo})
+    </insert>
+
 
 </mapper>

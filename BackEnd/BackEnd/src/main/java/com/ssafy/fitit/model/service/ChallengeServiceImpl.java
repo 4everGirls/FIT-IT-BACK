@@ -61,4 +61,9 @@ public class ChallengeServiceImpl implements ChallengeService{
 
         return challengeDao.selectAllMakeChallenge(userNo);
     }
+
+    @Override
+    public int insertParticipant(int challenge_no, int user_no) {
+        return challengeDao.insertParticipant(challenge_no,user_no);
+    }
 }

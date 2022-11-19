@@ -2,6 +2,7 @@ package com.ssafy.fitit.controller;
 
 import com.ssafy.fitit.model.dto.Challenge;
 import com.ssafy.fitit.model.dto.Mission;
+import com.ssafy.fitit.model.dto.Participant;
 import com.ssafy.fitit.model.service.ChallengeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -49,6 +50,13 @@ public class ChallengeController {
         List<Challenge> challengeList = challengeService.getMakeChallengList(userNo);
         return new ResponseEntity<>(challengeList,HttpStatus.OK);
     }
+
+    @PostMapping("/joinChallenge")
+    public ResponseEntity<String> joinChallenge(@RequestBody Participant participant){
+        challengeService.insertParticipant(participant.getChallengeNo(), participant.getUserNo());
+        return new ResponseEntity<>(SUCCESS,HttpStatus.OK);
+    }
+
 
 
 }
