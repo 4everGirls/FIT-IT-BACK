@@ -17,12 +17,21 @@
     </resultMap>
 
 
-    <!-- 사용자 정보를 저장한다. id는 repo클래스의 메소드 이름과 일치시킨다. -->
+    <!-- 사용자 정보를 저장한다. -->
     <insert id="insertUser" parameterType="User">
         INSERT INTO user (id,password,nickname,gender,birth, height,weight)
         VALUES (#{id},#{password},#{nickname},#{gender},#{birth},#{height},#{weight})
 
     </insert>
+    
+    <select id="idCheck" parameterType="String" resultType="int">
+        select count(*) from user where id =#{id}
+    </select>
+
+    <select id="nicknameCheck" parameterType="String" resultType="int">
+        select count(*) from user where nickname =#{nickname}
+    </select>
+    
 
     <select id="selectOne" resultMap="userMap" parameterType="String">
         SELECT * FROM user WHERE id = #{id}

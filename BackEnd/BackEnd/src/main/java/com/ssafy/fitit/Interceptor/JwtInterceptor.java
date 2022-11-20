@@ -1,6 +1,6 @@
 package com.ssafy.fitit.Interceptor;
 
-import com.ssafy.fitit.util.JwtUtil;
+import com.ssafy.fitit.model.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;

@@ -1,4 +1,4 @@
-package com.ssafy.fitit.util;
+package com.ssafy.fitit.model.util;
 
 
 import io.jsonwebtoken.Jwts;

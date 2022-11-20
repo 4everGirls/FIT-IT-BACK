@@ -17,6 +17,29 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public String idCheck(String id) {
+        String ID = id.trim();
+        int idNum = userDao.idCheck(ID);
+        if(idNum == 0){
+            return "success";
+        }else{
+            return "fail";
+        }
+
+    }
+
+    @Override
+    public String nicknameCheck(String nickname) {
+        String NICKNAME = nickname.trim();
+        int nicknameNum = userDao.nicknameCheck(NICKNAME);
+        if(nicknameNum == 0){
+            return "success";
+        }else{
+            return "fail";
+        }
+    }
+
+    @Override
     public User getUser(String id) {
         return userDao.selectOne(id);
     }

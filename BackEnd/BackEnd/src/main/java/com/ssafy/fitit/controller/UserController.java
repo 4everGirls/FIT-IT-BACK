@@ -2,7 +2,7 @@ package com.ssafy.fitit.controller;
 
 import com.ssafy.fitit.model.dto.User;
 import com.ssafy.fitit.model.service.UserService;
-import com.ssafy.fitit.util.JwtUtil;
+import com.ssafy.fitit.model.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +31,27 @@ public class UserController {
         return new ResponseEntity<String>(SUCCESS, HttpStatus.CREATED);
     }
 
+    @GetMapping("/idCheck/{id}")
+    public ResponseEntity<String> idCheck(@PathVariable String id){
+        String msg = userService.idCheck(id);
+        if(msg.equals("success")){
+            return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<String>(FAIL, HttpStatus.OK);
+        }
+    }
+
+    @GetMapping("/nicknameCheck/{nickname}")
+    public ResponseEntity<String> nicknameCheck(@PathVariable String nickname){
+        String msg = userService.nicknameCheck(nickname);
+        if(msg.equals("success")){
+            return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<String>(FAIL, HttpStatus.OK);
+        }
+    }
+
+
 //    @PostMapping("/login")
 //    public ResponseEntity<String> login(@RequestParam("id") String id, @RequestParam("password") String password){
 //        User loginUser = userService.getUser(id);
@@ -56,12 +77,12 @@ public class UserController {
                 result.put("user", user);
                 status = HttpStatus.ACCEPTED;
             }else {
-                System.out.println("여기?!11111");
+                System.out.println("11111");
                 result.put("message", FAIL);
                 status = HttpStatus.ACCEPTED;
             }
         } catch (UnsupportedEncodingException e) {
-            System.out.println("여기?!222222");
+            System.out.println("222");
             result.put("message", FAIL);
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
