@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping("/challengeApi")
 public class ChallengeController {
 
-    private static final String SUCCESS = "succes";
+    private static final String SUCCESS = "success";
     private static final String FAIL = "fail";
 
     @Autowired
