@@ -17,7 +17,8 @@ public class ChallengeServiceImpl implements ChallengeService{
 
     @Override
     public int insertChallenge(Challenge challenge) {
-
+        System.out.println("서비스에서 챌린지 이름");
+        System.out.println(challenge.getChallengeName());
         return challengeDao.insertChallenge(challenge);
     }
 

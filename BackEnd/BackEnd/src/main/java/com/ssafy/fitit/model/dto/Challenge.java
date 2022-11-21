@@ -91,4 +91,19 @@ public class Challenge {
     public void setPoint(int point) {
         this.point = point;
     }
+
+    @Override
+    public String toString() {
+        return "Challenge{" +
+                "challengeNo=" + challengeNo +
+                ", userNo=" + userNo +
+                ", challengeName='" + challengeName + '\'' +
+                ", challengeContent='" + challengeContent + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
+                ", point=" + point +
+                ", missions=" + missions +
+                ", reviews=" + reviews +
+                '}';
+    }
 }

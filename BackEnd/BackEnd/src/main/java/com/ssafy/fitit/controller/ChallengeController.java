@@ -26,7 +26,9 @@ public class ChallengeController {
     //챌린지 등록하기
     @PostMapping("/insertChallenge")
     public ResponseEntity<String> insertChallenge(@RequestBody Challenge challenge){
-
+        System.out.println("데이터 잘들어옴");
+        System.out.println(challenge);
+        System.out.println(challenge.toString());
         challengeService.insertChallenge(challenge);
         challengeService.insertMission(challenge);
         return new ResponseEntity<String>(SUCCESS, HttpStatus.CREATED);
