@@ -2,6 +2,7 @@ package com.ssafy.fitit.model.dao;
 
 import com.ssafy.fitit.model.dto.Bookmark;
 import com.ssafy.fitit.model.dto.Challenge;
+import com.ssafy.fitit.model.dto.ChallengeReview;
 import com.ssafy.fitit.model.dto.Mission;
 
 import java.util.List;
@@ -25,8 +26,26 @@ public interface ChallengeDao {
     int deleteMission(int challengeNo);
     int deleteChallenge(int challengeNo);
 
+    //특정 챌린지의 미션 정보
+    List<Mission> selectMissionByChallengeNo(int challengeNo);
+
+
     //내가 만든 챌린지 정보들
     List<Challenge> selectAllMakeChallenge(int userNo);
+
+    //전체 챌린지 정보들 (댓글 정보까지)
+    List<Challenge> selectAllChallenge();
+
+    //챌린지 리뷰등록
+    int insertChallengeReview(ChallengeReview challengeReview);
+
+    //챌린지 리뷰 리스트
+    List<ChallengeReview> selectChallengeReviewByChallengeNo(int challengeNo);
+
+    //특정 챌린지
+    Challenge oneChallengeByChallengeNo(int challengeNo);
+
+
 
     //챌린지 가입하기
     int insertParticipant(int challenge_no, int user_no);

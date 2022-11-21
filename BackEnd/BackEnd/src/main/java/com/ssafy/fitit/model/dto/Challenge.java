@@ -15,12 +15,22 @@ public class Challenge {
 
     private List<Mission> missions;
 
+    private List<ChallengeReview> reviews;
+
     public List<Mission> getMissions() {
         return missions;
     }
 
     public void setMissions(List<Mission> missions) {
         this.missions = missions;
+    }
+
+    public List<ChallengeReview> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<ChallengeReview> reviews) {
+        this.reviews = reviews;
     }
 
     public Challenge() {

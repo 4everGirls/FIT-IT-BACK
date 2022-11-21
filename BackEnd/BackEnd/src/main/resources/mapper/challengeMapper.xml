@@ -14,6 +14,23 @@
 <!--        <collection property="missions"/>-->
     </resultMap>
 
+    <resultMap id="MissionInfo" type="Mission">
+        <result column="mission_no" property="missionNo"/>
+        <result column="challenge" property="challengeNo"/>
+        <result column="video_id" property="videoId"/>
+        <result column="video_title" property="videoTitle"/>
+        <result column="channel_name" property="channelName"/>
+        <result column="video_thumbnail" property="videoThumbnail"/>
+    </resultMap>
+
+    <resultMap id="ReviewInfo" type="ChallengeReview">
+        <result column="challenge_review_no" property="challengeReviewNo"/>
+        <result column="challenge_no" property="challengeNo"/>
+        <result column="user_no" property="userNo"/>
+        <result column="content" property="content"/>
+        <result column="review_score" property="reviewScore"/>
+    </resultMap>
+
     <insert id="insertChallenge" parameterType="Challenge">
         insert into challenge (user_no, challenge_name, challenge_content, start_date, end_date, point)
         values (#{userNo}, #{challengeName}, #{challengeContent}, #{startDate}, #{endDate}, #{point})
@@ -60,12 +77,39 @@
         where challenge_no = #{challengeNo}
     </delete>
 
+    <select id="selectMissionByChallengeNo" parameterType="int" resultMap="MissionInfo">
+        select *
+        from mission
+        where challenge_no = #{challengeNo}
+    </select>
 
     <select id="selectAllMakeChallenge" parameterType="int" resultMap="ChallengeInfo">
         select *
         from challenge
         where user_no = #{userNo}
     </select>
+
+    <select id="selectAllChallenge" resultMap="ChallengeInfo">
+        select *
+        from challenge
+    </select>
+
+    <insert id="insertChallengeReview" parameterType="ChallengeReview">
+        insert into challenge_review (challenge_no, user_no, content, review_score)
+        values (#{challengeNo},#{userNo},#{content},#{reviewScore})
+    </insert>
+
+    <select id="selectChallengeReviewByChallengeNo" parameterType="int" resultMap="ReviewInfo">
+        select * from challenge_review where challenge_no=#{challengeNo}
+    </select>
+
+    <select id="oneChallengeByChallengeNo" parameterType="int" resultMap="ChallengeInfo">
+        select *
+        from challenge
+        where challenge_no = #{challengeNo}
+    </select>
+
+
 
     <insert id="insertParticipant" parameterType="int">
         insert into participant (challenge_no, user_no)

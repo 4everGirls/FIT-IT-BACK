@@ -2,6 +2,7 @@ package com.ssafy.fitit.model.service;
 
 import com.ssafy.fitit.model.dao.ChallengeDao;
 import com.ssafy.fitit.model.dto.Challenge;
+import com.ssafy.fitit.model.dto.ChallengeReview;
 import com.ssafy.fitit.model.dto.Mission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,9 +59,72 @@ public class ChallengeServiceImpl implements ChallengeService{
 
     @Override
     public List<Challenge> getMakeChallengList(int userNo) {
+        List<Challenge> challengeAndMission = challengeDao.selectAllMakeChallenge(userNo);
+        for(Challenge challenge : challengeAndMission){
+            int challengeNo = challenge.getChallengeNo();
+            //특정 챌린지 넘버의 미션들
+            List<Mission> missions =challengeDao.selectMissionByChallengeNo(challengeNo);
 
-        return challengeDao.selectAllMakeChallenge(userNo);
+            //미션 정보를 challenge에 넣어
+             challenge.setMissions(missions);
+
+            //특정 챌린지 넘버의 리뷰들
+            List<ChallengeReview> reviews = challengeDao.selectChallengeReviewByChallengeNo(challengeNo);
+
+            //챌린지 정보를 challenge에 넣어
+            challenge.setReviews(reviews);
+        }
+
+        return challengeAndMission;
     }
+
+    @Override
+    public List<Challenge> getAllChallenge() {
+
+        List<Challenge> challengeAndMission = challengeDao.selectAllChallenge();
+        for(Challenge challenge : challengeAndMission){
+            int challengeNo = challenge.getChallengeNo();
+            //특정 챌린지 넘버의 미션들
+            List<Mission> missions =challengeDao.selectMissionByChallengeNo(challengeNo);
+
+            //미션 정보를 challenge에 넣어
+            challenge.setMissions(missions);
+
+            //특정 챌린지 넘버의 리뷰들
+            List<ChallengeReview> reviews = challengeDao.selectChallengeReviewByChallengeNo(challengeNo);
+
+            //챌린지 정보를 challenge에 넣어
+            challenge.setReviews(reviews);
+        }
+
+        return challengeAndMission;
+    }
+
+    @Override
+    public int insertChallengeReview(ChallengeReview challengeReview) {
+        return challengeDao.insertChallengeReview(challengeReview);
+    }
+
+    @Override
+    public Challenge detailChallenge(int challengeNo) {
+
+        Challenge challenge = challengeDao.oneChallengeByChallengeNo(challengeNo);
+
+        //특정 챌린지 넘버의 미션들
+        List<Mission> missions =challengeDao.selectMissionByChallengeNo(challengeNo);
+
+        //미션 정보를 challenge에 넣어
+        challenge.setMissions(missions);
+
+        //특정 챌린지 넘버의 리뷰들
+        List<ChallengeReview> reviews = challengeDao.selectChallengeReviewByChallengeNo(challengeNo);
+
+        //챌린지 정보를 challenge에 넣어
+        challenge.setReviews(reviews);
+
+        return challenge;
+    }
+
 
     @Override
     public int insertParticipant(int challenge_no, int user_no) {
