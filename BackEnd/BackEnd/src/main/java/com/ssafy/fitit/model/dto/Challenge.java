@@ -13,25 +13,25 @@ public class Challenge {
     private String endDate;
     private int point;
 
-    private List<Mission> missions;
+//    private List<Mission> missions;
+//
+//    private List<ChallengeReview> reviews;
 
-    private List<ChallengeReview> reviews;
-
-    public List<Mission> getMissions() {
-        return missions;
-    }
-
-    public void setMissions(List<Mission> missions) {
-        this.missions = missions;
-    }
-
-    public List<ChallengeReview> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(List<ChallengeReview> reviews) {
-        this.reviews = reviews;
-    }
+//    public List<Mission> getMissions() {
+//        return missions;
+//    }
+//
+//    public void setMissions(List<Mission> missions) {
+//        this.missions = missions;
+//    }
+//
+//    public List<ChallengeReview> getReviews() {
+//        return reviews;
+//    }
+//
+//    public void setReviews(List<ChallengeReview> reviews) {
+//        this.reviews = reviews;
+//    }
 
     public Challenge() {
     }
@@ -102,8 +102,6 @@ public class Challenge {
                 ", startDate='" + startDate + '\'' +
                 ", endDate='" + endDate + '\'' +
                 ", point=" + point +
-                ", missions=" + missions +
-                ", reviews=" + reviews +
                 '}';
     }
 }

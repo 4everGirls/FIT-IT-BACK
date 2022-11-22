@@ -36,7 +36,7 @@
         values (#{userNo}, #{challengeName}, #{challengeContent}, #{startDate}, #{endDate}, #{point})
     </insert>
 
-    <select id="recetChallengeNo" resultType="int">
+    <select id="recentChallengeNo" resultType="int">
         select max(challenge_no) as challenge_no
         from challenge
     </select>

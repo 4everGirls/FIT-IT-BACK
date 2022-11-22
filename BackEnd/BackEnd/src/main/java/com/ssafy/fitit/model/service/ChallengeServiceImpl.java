@@ -1,6 +1,7 @@
 package com.ssafy.fitit.model.service;
 
 import com.ssafy.fitit.model.dao.ChallengeDao;
+import com.ssafy.fitit.model.dao.UserDao;
 import com.ssafy.fitit.model.dto.Challenge;
 import com.ssafy.fitit.model.dto.ChallengeReview;
 import com.ssafy.fitit.model.dto.Mission;
@@ -17,16 +18,18 @@ public class ChallengeServiceImpl implements ChallengeService{
 
     @Override
     public int insertChallenge(Challenge challenge) {
-        System.out.println("서비스에서 챌린지 이름");
-        System.out.println(challenge.getChallengeName());
-        return challengeDao.insertChallenge(challenge);
+
+        System.out.println("챌린지 등록");
+        //챌린지 등록
+        challengeDao.insertChallenge(challenge);
+
+        //방금만든 챌린지의 challengeNo
+        int challengeNO = challengeDao.recentChallengeNo();
+        return challengeNO;
     }
 
     @Override
-    public void insertMission(Challenge challenge) {
-        List<Mission> missions = challenge.getMissions();
-        //방금 등록된 challenge의 challenge no를 가져와라
-        int challengeNo = challengeDao.recetChallengeNo();
+    public void insertMission(List<Mission> missions, int challengeNo) {
 
         for(Mission mission : missions){
             //챌린지 넘버는 넣어주기
@@ -41,14 +44,14 @@ public class ChallengeServiceImpl implements ChallengeService{
         return challengeDao.updateChallenge(challenge);
     }
 
-    @Override
-    public void updateMission(Challenge challenge) {
-        List<Mission> missions = challenge.getMissions();
-        for(Mission mission : missions){
-
-            challengeDao.updateMission(mission);
-        }
-    }
+//    @Override
+//    public void updateMission(Challenge challenge) {
+//        List<Mission> missions = challenge.getMissions();
+//        for(Mission mission : missions){
+//
+//            challengeDao.updateMission(mission);
+//        }
+//    }
 
     @Override
     public int deleteChallenge(int challengeNo) {
@@ -61,20 +64,6 @@ public class ChallengeServiceImpl implements ChallengeService{
     @Override
     public List<Challenge> getMakeChallengList(int userNo) {
         List<Challenge> challengeAndMission = challengeDao.selectAllMakeChallenge(userNo);
-        for(Challenge challenge : challengeAndMission){
-            int challengeNo = challenge.getChallengeNo();
-            //특정 챌린지 넘버의 미션들
-            List<Mission> missions =challengeDao.selectMissionByChallengeNo(challengeNo);
-
-            //미션 정보를 challenge에 넣어
-             challenge.setMissions(missions);
-
-            //특정 챌린지 넘버의 리뷰들
-            List<ChallengeReview> reviews = challengeDao.selectChallengeReviewByChallengeNo(challengeNo);
-
-            //챌린지 정보를 challenge에 넣어
-            challenge.setReviews(reviews);
-        }
 
         return challengeAndMission;
     }
@@ -83,20 +72,6 @@ public class ChallengeServiceImpl implements ChallengeService{
     public List<Challenge> getAllChallenge() {
 
         List<Challenge> challengeAndMission = challengeDao.selectAllChallenge();
-        for(Challenge challenge : challengeAndMission){
-            int challengeNo = challenge.getChallengeNo();
-            //특정 챌린지 넘버의 미션들
-            List<Mission> missions =challengeDao.selectMissionByChallengeNo(challengeNo);
-
-            //미션 정보를 challenge에 넣어
-            challenge.setMissions(missions);
-
-            //특정 챌린지 넘버의 리뷰들
-            List<ChallengeReview> reviews = challengeDao.selectChallengeReviewByChallengeNo(challengeNo);
-
-            //챌린지 정보를 challenge에 넣어
-            challenge.setReviews(reviews);
-        }
 
         return challengeAndMission;
     }
@@ -111,19 +86,16 @@ public class ChallengeServiceImpl implements ChallengeService{
 
         Challenge challenge = challengeDao.oneChallengeByChallengeNo(challengeNo);
 
+
+        return challenge;
+    }
+
+    @Override
+    public List<Mission> detailMission(int challengeNo) {
         //특정 챌린지 넘버의 미션들
         List<Mission> missions =challengeDao.selectMissionByChallengeNo(challengeNo);
 
-        //미션 정보를 challenge에 넣어
-        challenge.setMissions(missions);
-
-        //특정 챌린지 넘버의 리뷰들
-        List<ChallengeReview> reviews = challengeDao.selectChallengeReviewByChallengeNo(challengeNo);
-
-        //챌린지 정보를 challenge에 넣어
-        challenge.setReviews(reviews);
-
-        return challenge;
+        return missions;
     }
 
 

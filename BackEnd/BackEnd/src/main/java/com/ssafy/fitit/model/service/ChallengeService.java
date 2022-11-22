@@ -12,11 +12,11 @@ public interface ChallengeService {
     int insertChallenge(Challenge challenge);
 
     //미션 등록
-    void insertMission(Challenge challenge);
+    void insertMission(List<Mission> missions, int challengeNo);
 
     //챌린지 수정
     int updateChallenge(Challenge challenge);
-    void updateMission(Challenge challenge);
+    //void updateMission(Challenge challenge);
 
     //챌린지+미션 삭제
     int deleteChallenge(int challengeNo);
@@ -32,8 +32,11 @@ public interface ChallengeService {
     //챌린지 리뷰등록
     int insertChallengeReview(ChallengeReview challengeReview);
 
-    //챌린지 상세페이지
+    //챌린지 상세페이지 - 챌린지
     Challenge detailChallenge(int challengeNo);
+
+    //챌린지 상세페이지 - 미션
+    List<Mission> detailMission(int challengeNo);
 
 
 

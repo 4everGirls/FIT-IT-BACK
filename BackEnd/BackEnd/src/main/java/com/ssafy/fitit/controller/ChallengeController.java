@@ -25,21 +25,33 @@ public class ChallengeController {
 
     //챌린지 등록하기
     @PostMapping("/insertChallenge")
-    public ResponseEntity<String> insertChallenge(@RequestBody Challenge challenge){
+    public ResponseEntity<Integer> insertChallenge(@RequestBody Challenge challenge){
         System.out.println("데이터 잘들어옴");
         System.out.println(challenge);
         System.out.println(challenge.toString());
-        challengeService.insertChallenge(challenge);
-        challengeService.insertMission(challenge);
+
+        //방금 등록한 챌린지의 challengeNo
+        int challengeNo = challengeService.insertChallenge(challenge);
+
+        return new ResponseEntity<Integer>(challengeNo, HttpStatus.CREATED);
+    }
+
+    //미션 등록하기
+    @PostMapping("/insertMission/{challengeNo}")
+    public ResponseEntity<String> insertMission(@PathVariable int challengeNo, @RequestBody ArrayList<Mission> missions){
+        System.out.println(" 미션 데이터 들어옴");
+        System.out.println(missions.toString());
+        challengeService.insertMission(missions, challengeNo);
         return new ResponseEntity<String>(SUCCESS, HttpStatus.CREATED);
     }
+
     //내가 만든 챌린지 수정
-    @PutMapping("/updateChallenge")
-    public ResponseEntity<String> updateChallenge(@RequestBody Challenge challenge){
-        challengeService.updateChallenge(challenge);
-        challengeService.updateMission(challenge);
-        return  new ResponseEntity<String>(SUCCESS,HttpStatus.OK);
-    }
+//    @PutMapping("/updateChallenge")
+//    public ResponseEntity<String> updateChallenge(@RequestBody Challenge challenge){
+//        challengeService.updateChallenge(challenge);
+//        challengeService.updateMission(challenge);
+//        return  new ResponseEntity<String>(SUCCESS,HttpStatus.OK);
+//    }
 
     //내가 만든 챌린지 삭제
     @DeleteMapping("/deleteChallenge/{challengeNo}")
@@ -72,13 +84,21 @@ public class ChallengeController {
         return new ResponseEntity<>(SUCCESS,HttpStatus.CREATED);
     }
 
-    //챌린지 상세 페이지
+    //챌린지 상세 페이지 - 챌린지 정보
     @GetMapping("/detailChallenge/{challengeNo}")
     public ResponseEntity<Challenge> detailChallenge(@PathVariable int challengeNo){
 
         Challenge challenge = challengeService.detailChallenge(challengeNo);
         return  new ResponseEntity<>(challenge,HttpStatus.OK);
     }
+    //챌린지 상세 페이지 - 미션 정보
+    @GetMapping("/detailMission/{challengeNo}")
+    public ResponseEntity<List<Mission>> detailMission(@PathVariable int challengeNo){
+
+        List<Mission> mission = challengeService.detailMission(challengeNo);
+        return  new ResponseEntity<>(mission,HttpStatus.OK);
+    }
+
 
 
     //챌린지 참여하기

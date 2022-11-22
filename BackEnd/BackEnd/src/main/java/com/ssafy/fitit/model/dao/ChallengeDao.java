@@ -13,7 +13,7 @@ public interface ChallengeDao {
     int insertChallenge(Challenge challenge);
 
     //방금 만든 챌린지의 challengeNo
-    int recetChallengeNo();
+    int recentChallengeNo();
 
     //챌린지 만들때 미션 생성
     void insertMission(Mission mission);
