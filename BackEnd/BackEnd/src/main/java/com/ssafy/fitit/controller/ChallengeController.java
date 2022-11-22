@@ -99,15 +99,35 @@ public class ChallengeController {
         return  new ResponseEntity<>(mission,HttpStatus.OK);
     }
 
+    //내가 참여한 챌린지들 정보
+    @GetMapping("/myJoinChallengeList/{userNo}")
+    public ResponseEntity<List<Challenge>> myJoinChallengeList(@PathVariable int userNo){
+        List<Challenge> challengeList = challengeService.getmyJoinChallengeList(userNo);
 
+        return new ResponseEntity<>(challengeList,HttpStatus.OK);
+    }
+    //이 챌린지 참여 중인지
+    @GetMapping("/isJoinChallenge/{challengeNo}/{userNo}")
+    public ResponseEntity<Integer> isjoinChallenge(@PathVariable int challengeNo, @PathVariable int userNo){
+
+        int isJoin = challengeService.isJoinChallenge(challengeNo, userNo);
+        return new ResponseEntity<>(isJoin,HttpStatus.OK);
+    }
 
     //챌린지 참여하기
-    @PostMapping("/joinChallenge")
-    public ResponseEntity<String> joinChallenge(@RequestParam("challengeNo") int challengeNo, @RequestParam("userNo") int userNo){
+    @GetMapping("/joinChallenge/{challengeNo}/{userNo}")
+    public ResponseEntity<String> joinChallenge(@PathVariable int challengeNo, @PathVariable int userNo){
         System.out.println("챌린지 조인한다");
         System.out.println(challengeNo);
         challengeService.insertParticipant(challengeNo, userNo);
         return new ResponseEntity<>(SUCCESS,HttpStatus.OK);
+    }
+
+    //미션 영상 가져오기
+    @GetMapping("/missionVideo/{missionNo}")
+    public ResponseEntity<Mission> missionInfo(@PathVariable int missionNo){
+        Mission missionInfo = challengeService.missionInfo(missionNo);
+        return new ResponseEntity<>(missionInfo,HttpStatus.OK);
     }
 
 

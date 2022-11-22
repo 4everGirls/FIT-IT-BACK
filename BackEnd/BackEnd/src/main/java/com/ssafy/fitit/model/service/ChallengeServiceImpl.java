@@ -8,6 +8,7 @@ import com.ssafy.fitit.model.dto.Mission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -100,12 +101,39 @@ public class ChallengeServiceImpl implements ChallengeService{
         return missions;
     }
 
+    @Override
+    public List<Challenge> getmyJoinChallengeList(int userNo) {
+        //내가 가입한 챌린지들의 정보
+        List<Integer> challengeNo = challengeDao.getmyJoinChallengeNo(userNo);
+
+        List<Challenge> getmyJoinChallengeList = new ArrayList<>();
+        //내가 가입한 챌린지 넘버로 내가 가입한 챌린지 리스트들 가져오기
+        for(int no: challengeNo){
+            getmyJoinChallengeList.add(challengeDao.oneChallengeByChallengeNo(no));
+        }
+        return getmyJoinChallengeList;
+    }
 
     @Override
-    public int insertParticipant(int challenge_no, int user_no) {
+    public int isJoinChallenge(int challengeNo, int userNo) {
+        //내가 가입한 챌린지들의 정보
+        List<Integer> challengeNoList = challengeDao.getmyJoinChallengeNo(userNo);
+        int isJoinChallenge = challengeNoList.size();
+        return isJoinChallenge;
+    }
+
+    @Override
+    public Mission missionInfo(int missionNo) {
+        return challengeDao.selectOneMissionByMissionNo(missionNo);
+    }
+
+
+    @Override
+    public int insertParticipant(int challengeNo, int userNo) {
         Map<String,Integer> newMap = new HashMap<>();
-        newMap.put("challengeNo", challenge_no);
-        newMap.put("userNo", user_no);
+        newMap.put("challengeNo", challengeNo);
+        newMap.put("userNo", userNo);
+
         return challengeDao.insertParticipant(newMap);
     }
 }

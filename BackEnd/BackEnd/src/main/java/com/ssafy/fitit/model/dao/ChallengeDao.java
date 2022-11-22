@@ -51,7 +51,9 @@ public interface ChallengeDao {
     //챌린지 가입하기
     int insertParticipant(Map<String,Integer> map);
 
-    //내가 가입한 챌린지 정보들
+    //내가 가입한 챌린지들의 챌린지 no
+    List<Integer> getmyJoinChallengeNo (int userNo) ;
+
 
     //전체 챌린지 정보(나중에 챌린지 분류)
 
@@ -63,6 +65,9 @@ public interface ChallengeDao {
 
     //북마크 정보 불러오기
     List<Bookmark> selectBookMark(int userNo);
+
+    //미션 no로 미션 1개 검색
+    Mission selectOneMissionByMissionNo( int missionNo);
 
 
 

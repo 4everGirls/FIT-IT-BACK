@@ -116,5 +116,14 @@
         values (#{challengeNo},#{userNo})
     </insert>
 
+    <select id="getmyJoinChallengeNo" parameterType="int" resultType="int">
+        select challenge_no as challengeNo from participant where user_no = #{userNo}
+    </select>
+
+
+    <select id="selectOneMissionByMissionNo" resultMap="MissionInfo">
+        select * from mission where mission_no = #{missionNo}
+    </select>
+
 
 </mapper>

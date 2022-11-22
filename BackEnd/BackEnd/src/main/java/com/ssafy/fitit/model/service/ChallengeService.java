@@ -38,6 +38,15 @@ public interface ChallengeService {
     //챌린지 상세페이지 - 미션
     List<Mission> detailMission(int challengeNo);
 
+    //내가 참여한 챌린지
+    List<Challenge> getmyJoinChallengeList(int userNo);
+
+    //이 챌린지 참여중인지
+    int isJoinChallenge(int challengeNo, int userNo);
+
+    //미션 정보
+    Mission missionInfo(int missionNo);
+
 
 
 
