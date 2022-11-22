@@ -6,6 +6,7 @@ import com.ssafy.fitit.model.dto.ChallengeReview;
 import com.ssafy.fitit.model.dto.Mission;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ChallengeDao {
 
@@ -48,7 +49,7 @@ public interface ChallengeDao {
 
 
     //챌린지 가입하기
-    int insertParticipant(int challenge_no, int user_no);
+    int insertParticipant(Map<String,Integer> map);
 
     //내가 가입한 챌린지 정보들
 

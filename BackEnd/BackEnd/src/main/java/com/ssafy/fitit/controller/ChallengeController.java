@@ -103,8 +103,10 @@ public class ChallengeController {
 
     //챌린지 참여하기
     @PostMapping("/joinChallenge")
-    public ResponseEntity<String> joinChallenge(@RequestBody Participant participant){
-        challengeService.insertParticipant(participant.getChallengeNo(), participant.getUserNo());
+    public ResponseEntity<String> joinChallenge(@RequestParam("challengeNo") int challengeNo, @RequestParam("userNo") int userNo){
+        System.out.println("챌린지 조인한다");
+        System.out.println(challengeNo);
+        challengeService.insertParticipant(challengeNo, userNo);
         return new ResponseEntity<>(SUCCESS,HttpStatus.OK);
     }
 

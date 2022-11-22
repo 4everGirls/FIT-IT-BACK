@@ -8,7 +8,9 @@ import com.ssafy.fitit.model.dto.Mission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ChallengeServiceImpl implements ChallengeService{
@@ -101,6 +103,9 @@ public class ChallengeServiceImpl implements ChallengeService{
 
     @Override
     public int insertParticipant(int challenge_no, int user_no) {
-        return challengeDao.insertParticipant(challenge_no,user_no);
+        Map<String,Integer> newMap = new HashMap<>();
+        newMap.put("challengeNo", challenge_no);
+        newMap.put("userNo", user_no);
+        return challengeDao.insertParticipant(newMap);
     }
 }

@@ -111,7 +111,7 @@
 
 
 
-    <insert id="insertParticipant" parameterType="int">
+    <insert id="insertParticipant" parameterType="map">
         insert into participant (challenge_no, user_no)
         values (#{challengeNo},#{userNo})
     </insert>
