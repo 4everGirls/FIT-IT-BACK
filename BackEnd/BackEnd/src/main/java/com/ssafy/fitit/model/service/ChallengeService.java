@@ -1,5 +1,6 @@
 package com.ssafy.fitit.model.service;
 
+import com.ssafy.fitit.model.dto.Bookmark;
 import com.ssafy.fitit.model.dto.Challenge;
 import com.ssafy.fitit.model.dto.ChallengeReview;
 import com.ssafy.fitit.model.dto.Mission;
@@ -48,12 +49,19 @@ public interface ChallengeService {
     Mission missionInfo(int missionNo);
 
 
-
-
-
-
-
     //챌린지 가입하기
-    int insertParticipant(int challenge_no, int user_no);
+    int insertParticipant(int challengeNo, int userNo);
+
+    //챌린지 가입 취소하기
+    int deleteParticipant(int challengeNo, int userNo);
+
+    //이 챌린지에 참여된 사람들 정보
+    List<Integer> participantInfo(int challengeNo);
+
+    //북마크 등록하기
+    int insertBookMark(Bookmark bookmark);
+
+    //북마크 삭제하기
+    int deleteBookMark(int bookmarkNo);
 
 }

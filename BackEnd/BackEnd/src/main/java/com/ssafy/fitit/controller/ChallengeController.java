@@ -1,9 +1,6 @@
 package com.ssafy.fitit.controller;
 
-import com.ssafy.fitit.model.dto.Challenge;
-import com.ssafy.fitit.model.dto.ChallengeReview;
-import com.ssafy.fitit.model.dto.Mission;
-import com.ssafy.fitit.model.dto.Participant;
+import com.ssafy.fitit.model.dto.*;
 import com.ssafy.fitit.model.service.ChallengeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -106,6 +103,14 @@ public class ChallengeController {
 
         return new ResponseEntity<>(challengeList,HttpStatus.OK);
     }
+
+    //이 챌린지에 참여된 사람들 정보들
+    @GetMapping("/participantInfo/{challengeNo}")
+    public ResponseEntity<List<Integer>> participantInfo(@PathVariable int challengeNo){
+        List<Integer> participantList = challengeService.participantInfo(challengeNo);
+
+        return new ResponseEntity<>(participantList,HttpStatus.OK);
+    }
     //이 챌린지 참여 중인지
     @GetMapping("/isJoinChallenge/{challengeNo}/{userNo}")
     public ResponseEntity<Integer> isjoinChallenge(@PathVariable int challengeNo, @PathVariable int userNo){
@@ -114,7 +119,7 @@ public class ChallengeController {
         return new ResponseEntity<>(isJoin,HttpStatus.OK);
     }
 
-    //챌린지 참여하기
+    //챌린지 가입하기
     @GetMapping("/joinChallenge/{challengeNo}/{userNo}")
     public ResponseEntity<String> joinChallenge(@PathVariable int challengeNo, @PathVariable int userNo){
         System.out.println("챌린지 조인한다");
@@ -123,6 +128,15 @@ public class ChallengeController {
         return new ResponseEntity<>(SUCCESS,HttpStatus.OK);
     }
 
+    //챌린지 가입 취소하기
+    @DeleteMapping("/notJoinChallenge/{challengeNo}/{userNo}")
+    public ResponseEntity<String> notJoinChallenge(@PathVariable int challengeNo, @PathVariable int userNo){
+
+        challengeService.deleteParticipant(challengeNo, userNo);
+        return new ResponseEntity<>(SUCCESS,HttpStatus.OK);
+    }
+
+
     //미션 영상 가져오기
     @GetMapping("/missionVideo/{missionNo}")
     public ResponseEntity<Mission> missionInfo(@PathVariable int missionNo){
@@ -130,6 +144,21 @@ public class ChallengeController {
         return new ResponseEntity<>(missionInfo,HttpStatus.OK);
     }
 
+    //북마크 등록하기
+    @PostMapping("/insertBookmark")
+    public ResponseEntity<String> insertBookmark(@RequestBody Bookmark bookmark){
+        System.out.println(bookmark.getMissionNo());
+        System.out.println(bookmark.getUserNo());
+        challengeService.insertBookMark(bookmark);
+        return  new ResponseEntity<>(SUCCESS,HttpStatus.OK);
+    }
+
+    //북마크 삭제하기
+    @DeleteMapping("/deleteBookmark/{bookmarkNo}")
+    public ResponseEntity<String> deleteBookmark(@PathVariable int bookmarkNo){
+        challengeService.deleteBookMark(bookmarkNo);
+        return new ResponseEntity<>(SUCCESS,HttpStatus.OK);
+    }
 
 
 }

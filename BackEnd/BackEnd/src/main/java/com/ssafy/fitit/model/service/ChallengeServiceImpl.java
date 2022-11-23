@@ -2,6 +2,7 @@ package com.ssafy.fitit.model.service;
 
 import com.ssafy.fitit.model.dao.ChallengeDao;
 import com.ssafy.fitit.model.dao.UserDao;
+import com.ssafy.fitit.model.dto.Bookmark;
 import com.ssafy.fitit.model.dto.Challenge;
 import com.ssafy.fitit.model.dto.ChallengeReview;
 import com.ssafy.fitit.model.dto.Mission;
@@ -135,5 +136,31 @@ public class ChallengeServiceImpl implements ChallengeService{
         newMap.put("userNo", userNo);
 
         return challengeDao.insertParticipant(newMap);
+    }
+
+    @Override
+    public int deleteParticipant(int challengeNo, int userNo) {
+        Map<String,Integer> newMap = new HashMap<>();
+        newMap.put("challengeNo", challengeNo);
+        newMap.put("userNo", userNo);
+        int participantNo = challengeDao.getParticipantNo(newMap);
+
+;        return challengeDao.deleteParticipant(participantNo);
+    }
+
+    @Override
+    public List<Integer> participantInfo(int challengeNo) {
+        List<Integer> userInfo = challengeDao.participantInfo(challengeNo);
+        return userInfo;
+    }
+
+    @Override
+    public int insertBookMark(Bookmark bookmark) {
+        return challengeDao.insertBookMark(bookmark);
+    }
+
+    @Override
+    public int deleteBookMark(int bookmarkNo) {
+        return challengeDao.deleteBookMark(bookmarkNo);
     }
 }

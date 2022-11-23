@@ -116,14 +116,38 @@
         values (#{challengeNo},#{userNo})
     </insert>
 
+    <select id="getParticipantNo" parameterType="map" resultType="int">
+        select participant_no as participantNo
+        from participant
+        where user_no = #{userNo} AND challenge_no = #{challengeNo};
+    </select>
+
+    <delete id="deleteParticipant" parameterType="int">
+        delete from participant where participant_no =#{participantNo}
+    </delete>
+
     <select id="getmyJoinChallengeNo" parameterType="int" resultType="int">
         select challenge_no as challengeNo from participant where user_no = #{userNo}
+    </select>
+
+    <select id="participantInfo" parameterType="int" resultType="int">
+        select user_no as challengeNo from participant where challenge_no = #{challengeNo}
     </select>
 
 
     <select id="selectOneMissionByMissionNo" resultMap="MissionInfo">
         select * from mission where mission_no = #{missionNo}
     </select>
+
+    <insert id="insertBookMark" parameterType="Bookmark">
+        insert into bookmark(user_no, mission_no)
+        values (#{userNo}, #{missionNo});
+
+    </insert>
+
+    <delete id="deleteBookMark" parameterType="int">
+        delete from bookmark where bookmark_no = #{bookmarkNo};
+    </delete>
 
 
 </mapper>

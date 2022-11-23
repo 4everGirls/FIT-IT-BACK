@@ -51,8 +51,16 @@ public interface ChallengeDao {
     //챌린지 가입하기
     int insertParticipant(Map<String,Integer> map);
 
+    //챌린지 참여자 정보 가져오기
+    int getParticipantNo(Map<String,Integer> map);
+    //챌린지 가입 취소하가ㅣ
+    int deleteParticipant(int participantNo);
+
     //내가 가입한 챌린지들의 챌린지 no
     List<Integer> getmyJoinChallengeNo (int userNo) ;
+
+    //챌린지의 참여한 사람 정보
+    List<Integer> participantInfo(int challengeNo);
 
 
     //전체 챌린지 정보(나중에 챌린지 분류)
@@ -62,6 +70,9 @@ public interface ChallengeDao {
 
     //북마크 등록하기
     int insertBookMark(Bookmark bookmark);
+
+    //북마크 삭제하기
+    int deleteBookMark(int bookmarkNo);
 
     //북마크 정보 불러오기
     List<Bookmark> selectBookMark(int userNo);
