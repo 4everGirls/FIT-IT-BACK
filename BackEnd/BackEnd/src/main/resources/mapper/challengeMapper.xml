@@ -116,6 +116,8 @@
         values (#{challengeNo},#{userNo})
     </insert>
 
+
+
     <select id="getParticipantNo" parameterType="map" resultType="int">
         select participant_no as participantNo
         from participant
@@ -148,6 +150,15 @@
     <delete id="deleteBookMark" parameterType="int">
         delete from bookmark where bookmark_no = #{bookmarkNo};
     </delete>
+
+
+    <update id="updateParticipant" parameterType="int">
+        update participant set challenge_complete = "Y" where participant_no =#{participantNo};
+    </update>
+
+    <select id="completeResult" parameterType="int" resultType="String">
+        select challenge_complete from participant where participant_no=#{participantNo};
+    </select>
 
 
 </mapper>

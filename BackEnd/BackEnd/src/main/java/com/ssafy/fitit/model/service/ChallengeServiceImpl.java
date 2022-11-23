@@ -130,12 +130,14 @@ public class ChallengeServiceImpl implements ChallengeService{
 
 
     @Override
-    public int insertParticipant(int challengeNo, int userNo) {
+    public void insertParticipant(int challengeNo, int userNo) {
         Map<String,Integer> newMap = new HashMap<>();
         newMap.put("challengeNo", challengeNo);
         newMap.put("userNo", userNo);
 
-        return challengeDao.insertParticipant(newMap);
+        challengeDao.insertParticipant(newMap);
+
+
     }
 
     @Override
@@ -162,5 +164,24 @@ public class ChallengeServiceImpl implements ChallengeService{
     @Override
     public int deleteBookMark(int bookmarkNo) {
         return challengeDao.deleteBookMark(bookmarkNo);
+    }
+
+    @Override
+    public int updateParticipant(int challengeNo, int userNo) {
+        Map<String,Integer> newMap = new HashMap<>();
+        newMap.put("challengeNo", challengeNo);
+        newMap.put("userNo", userNo);
+        int participantNo = challengeDao.getParticipantNo(newMap);
+        return challengeDao.updateParticipant(participantNo);
+    }
+
+    @Override
+    public String completeResult(int challengeNo, int userNo) {
+        Map<String,Integer> newMap = new HashMap<>();
+        newMap.put("challengeNo", challengeNo);
+        newMap.put("userNo", userNo);
+        int participantNo = challengeDao.getParticipantNo(newMap);
+
+        return challengeDao.completeResult(participantNo);
     }
 }

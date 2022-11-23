@@ -50,7 +50,7 @@ public interface ChallengeService {
 
 
     //챌린지 가입하기
-    int insertParticipant(int challengeNo, int userNo);
+    void insertParticipant(int challengeNo, int userNo);
 
     //챌린지 가입 취소하기
     int deleteParticipant(int challengeNo, int userNo);
@@ -63,5 +63,11 @@ public interface ChallengeService {
 
     //북마크 삭제하기
     int deleteBookMark(int bookmarkNo);
+
+    //챌린지 완료
+    int updateParticipant(int challengeNo, int userNo);
+
+    //챌린지 완료인지 아닌지
+    String completeResult (int challengeNo, int userNo);
 
 }

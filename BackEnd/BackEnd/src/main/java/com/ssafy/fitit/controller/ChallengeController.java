@@ -161,4 +161,22 @@ public class ChallengeController {
     }
 
 
+    //챌린지 완료
+    @PutMapping("/completeMission/{challengeNo}/{userNo}")
+    public ResponseEntity<String> completeChallenge(@PathVariable int challengeNo, @PathVariable int userNo){
+        challengeService.updateParticipant(challengeNo,userNo);
+        return new ResponseEntity<>(SUCCESS,HttpStatus.OK);
+    }
+
+    //챌린지 완료인지 아닌지
+    @GetMapping("/isCompleteChallenge/{challengeNo}/{userNo}")
+    public ResponseEntity<String> isCompleteChallenge(@PathVariable int challengeNo, @PathVariable int userNo){
+        System.out.println("isComplete??????????????????");
+        String isCompleteChallenge = challengeService.completeResult(challengeNo,userNo);
+        System.out.println("isComplete??????????????????");
+        System.out.println(isCompleteChallenge);
+        return new ResponseEntity<>(isCompleteChallenge,HttpStatus.OK);
+    }
+
+
 }

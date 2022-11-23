@@ -1,9 +1,6 @@
 package com.ssafy.fitit.model.dao;
 
-import com.ssafy.fitit.model.dto.Bookmark;
-import com.ssafy.fitit.model.dto.Challenge;
-import com.ssafy.fitit.model.dto.ChallengeReview;
-import com.ssafy.fitit.model.dto.Mission;
+import com.ssafy.fitit.model.dto.*;
 
 import java.util.List;
 import java.util.Map;
@@ -51,6 +48,12 @@ public interface ChallengeDao {
     //챌린지 가입하기
     int insertParticipant(Map<String,Integer> map);
 
+
+
+    //미션 컴플릿 넣기
+
+    int insertMissionComplete(MissionComplete missionComplete);
+
     //챌린지 참여자 정보 가져오기
     int getParticipantNo(Map<String,Integer> map);
     //챌린지 가입 취소하가ㅣ
@@ -79,6 +82,12 @@ public interface ChallengeDao {
 
     //미션 no로 미션 1개 검색
     Mission selectOneMissionByMissionNo( int missionNo);
+
+    //챌린지 완료
+    int updateParticipant(int participantNo);
+
+    //챌린지 완료인지 아닌지 상태
+    String completeResult(int participantNo);
 
 
 
