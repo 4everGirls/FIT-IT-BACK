@@ -179,4 +179,22 @@ public class ChallengeController {
     }
 
 
+    //가입한 사람들 리스트
+    @GetMapping("/participantList/{challengNo}")
+    public ResponseEntity<List<String>> participantList(@PathVariable int challengNo){
+        //리스트 사람이름 받는거
+        List<String> participantName = challengeService.participantList(challengNo);
+
+        return new ResponseEntity<>(participantName,HttpStatus.OK);
+    }
+
+    //가입한 사람들 수
+    @GetMapping("/participantCount/{challengNo}")
+    public ResponseEntity<Integer> participantCount(@PathVariable int challengNo){
+        int participantNo = challengeService.participantCount(challengNo);
+
+        return new ResponseEntity<>(participantNo,HttpStatus.OK);
+    }
+
+
 }

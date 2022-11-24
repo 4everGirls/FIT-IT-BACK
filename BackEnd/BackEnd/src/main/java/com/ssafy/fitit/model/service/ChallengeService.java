@@ -70,4 +70,10 @@ public interface ChallengeService {
     //챌린지 완료인지 아닌지
     String completeResult (int challengeNo, int userNo);
 
+    //가입한 사람들 리스트
+    List<String> participantList(int challengNo);
+
+    //가입한 사람들 수
+    int participantCount(int challengNo);
+
 }

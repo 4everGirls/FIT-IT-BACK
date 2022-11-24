@@ -160,5 +160,14 @@
         select challenge_complete from participant where participant_no=#{participantNo};
     </select>
 
+    <select id="selectAllParticipantReturnName" parameterType="int" resultType="String">
+        select nickname from user where user_no IN
+        (select user_no from participant where challenge_no =#{challengeNo})
+    </select>
+
+    <select id="selectParticipantCount" parameterType="int" resultType="int">
+        select count(*) from user where user_no IN
+        (select user_no from participant where challenge_no =#{challengeNo})
+    </select>
 
 </mapper>

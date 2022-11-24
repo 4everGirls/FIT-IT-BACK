@@ -184,4 +184,14 @@ public class ChallengeServiceImpl implements ChallengeService{
 
         return challengeDao.completeResult(participantNo);
     }
+
+    @Override
+    public List<String> participantList(int challengNo) {
+        return challengeDao.selectAllParticipantReturnName(challengNo);
+    }
+
+    @Override
+    public int participantCount(int challengNo) {
+        return challengeDao.selectParticipantCount(challengNo);
+    }
 }

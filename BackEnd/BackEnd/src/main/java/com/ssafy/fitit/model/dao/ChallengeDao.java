@@ -89,6 +89,12 @@ public interface ChallengeDao {
     //챌린지 완료인지 아닌지 상태
     String completeResult(int participantNo);
 
+    //가입한 사람들 리스트
+    List<String> selectAllParticipantReturnName(int challengNo);
+
+    //가입한 사람들 수
+    int selectParticipantCount(int challengNo);
+
 
 
 
